@@ -1,0 +1,10 @@
+# IntelliJ
+.idea/
+out/
+
+# P5 build
+node_modules/
+.vscode/
+build/
+**/*.js
+**/*.js.map
