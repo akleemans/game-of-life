@@ -8,3 +8,5 @@ node_modules/
 build/
 **/*.js
 **/*.js.map
+
+package-lock.json
