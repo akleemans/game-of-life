@@ -100,11 +100,22 @@ const resetField = (random: boolean): void => {
     }
 };
 
+const getMousePos = (canvas: HTMLElement, event: MouseEvent): {x: number, y: number} => {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+}
+
 // Triggered by P5
 function mouseClicked(event: any): void {
-    console.log('mouseClicked:', event);
-    const x = Math.floor(event.layerX / cellSize);
-    const y = Math.floor(event.layerY / cellSize);
+    // Code adapted from: https://stackoverflow.com/a/17130415
+    const canvas = document.getElementsByTagName('canvas')[0];
+    const pos = this.getMousePos(canvas, event);
+
+    const x = Math.floor(pos.x / cellSize);
+    const y = Math.floor(pos.y / cellSize);
 
     if (state === State.input && x >= 0 && x < w && y > 0 && y < h) {
         activeCells[x][y] = (activeCells[x][y] === 0) ? 1 : 0;

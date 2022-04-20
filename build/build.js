@@ -87,10 +87,19 @@ var resetField = function (random) {
         }
     }
 };
+var getMousePos = function (canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+};
 function mouseClicked(event) {
     console.log('mouseClicked:', event);
-    var x = Math.floor(event.layerX / cellSize);
-    var y = Math.floor(event.layerY / cellSize);
+    var canvas = document.getElementsByTagName('canvas')[0];
+    var pos = this.getMousePos(canvas, event);
+    var x = Math.floor(pos.x / cellSize);
+    var y = Math.floor(pos.y / cellSize);
     if (state === State.input && x >= 0 && x < w && y > 0 && y < h) {
         activeCells[x][y] = (activeCells[x][y] === 0) ? 1 : 0;
     }
